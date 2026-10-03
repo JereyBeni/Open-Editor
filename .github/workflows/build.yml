@@ -48,42 +48,18 @@ jobs:
       - name: Check
         run: cargo check
 
-      # Windows → zip
-      - name: Create Windows zip
-        if: matrix.os == 'windows-latest'
-        run: |
-          mkdir dist
-          copy target\release\open-editor.exe dist\
-          powershell Compress-Archive -Path dist\* -DestinationPath open-editor-windows.zip
-
-      - name: Upload Windows zip
+      # Windows - upload the exe directly (GitHub will zip it cleanly)
+      - name: Upload Windows binary
         if: matrix.os == 'windows-latest'
         uses: actions/upload-artifact@v4
         with:
-          name: open-editor-windows
-          path: open-editor-windows.zip
+          name: Open-Editor-Windows
+          path: target/release/open-editor.exe
 
-      # Linux → zip
-      - name: Create Linux zip
-        if: matrix.os == 'ubuntu-latest'
-        run: |
-          mkdir -p dist
-          cp target/release/open-editor dist/
-          zip -r open-editor-linux.zip dist
-
-      - name: Upload Linux zip
+      # Linux - upload the binary directly
+      - name: Upload Linux binary
         if: matrix.os == 'ubuntu-latest'
         uses: actions/upload-artifact@v4
         with:
-          name: open-editor-linux
-          path: open-editor-linux.zip
-
-  # Android job (placeholder - will activate later)
-  # android:
-  #   name: Build Android
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v4
-  #     - name: Setup Android + Rust
-  #       ...
-  #     - run: cargo apk build --release
+          name: Open-Editor-Linux
+          path: target/release/open-editor

@@ -15,8 +15,6 @@ jobs:
       fail-fast: false
       matrix:
         os: [windows-latest, ubuntu-latest]
-        # macOS later if needed
-        # Android will be added in a separate job
 
     steps:
       - name: Checkout
@@ -50,19 +48,35 @@ jobs:
       - name: Check
         run: cargo check
 
-      - name: Upload artifact (Windows)
+      # Windows → zip
+      - name: Create Windows zip
+        if: matrix.os == 'windows-latest'
+        run: |
+          mkdir dist
+          copy target\release\open-editor.exe dist\
+          powershell Compress-Archive -Path dist\* -DestinationPath open-editor-windows.zip
+
+      - name: Upload Windows zip
         if: matrix.os == 'windows-latest'
         uses: actions/upload-artifact@v4
         with:
           name: open-editor-windows
-          path: target/release/open-editor.exe
+          path: open-editor-windows.zip
 
-      - name: Upload artifact (Linux)
+      # Linux → zip
+      - name: Create Linux zip
+        if: matrix.os == 'ubuntu-latest'
+        run: |
+          mkdir -p dist
+          cp target/release/open-editor dist/
+          zip -r open-editor-linux.zip dist
+
+      - name: Upload Linux zip
         if: matrix.os == 'ubuntu-latest'
         uses: actions/upload-artifact@v4
         with:
           name: open-editor-linux
-          path: target/release/open-editor
+          path: open-editor-linux.zip
 
   # Android job (placeholder - will activate later)
   # android:

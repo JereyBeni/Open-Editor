@@ -20,6 +20,13 @@ Legacy Vegas DirectFX / DirectX Media style effects (the old plugin system).
 
 > Note: BCC and Sapphire are commercial. Open Editor will be a proper OFX host so you can load your own licensed copies.
 
+## Platforms
+- ✅ **Windows** (CI active)
+- ✅ **Linux** (CI active)
+- ⏳ **Android** (planned – will be added later)
+
+GitHub Actions builds release binaries for Windows and Linux on every push.
+
 ## Goals
 - Timeline-based editor
 - Native OFX + DirectFX host

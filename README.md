@@ -2,50 +2,60 @@
 
 **Lightweight open-source video editor** inspired by VEGAS Pro.
 
-- **UI written in Rust** (egui)
-- Recreates classic VEGAS Pro effects
-- **DirectFX** effects support (legacy Vegas plugins)
-- Full **OpenFX (OFX)** host
-- Designed for low-spec machines (1GB+ RAM, Windows XP → 11)
+[![Build](https://github.com/JereyBeni/Open-Editor/actions/workflows/build.yml/badge.svg)](https://github.com/JereyBeni/Open-Editor/actions/workflows/build.yml)
 
-## First Priorities
+- UI written in **Rust** (egui)
+- Support for **DirectFX** (legacy Vegas effects)
+- Full **OpenFX** host (BCC + SapphireFX as priority)
+- Extremely low resource usage (targets 1GB RAM machines)
+- Windows + Linux (Android planned)
 
-### 1. DirectFX Support
-Legacy Vegas DirectFX / DirectX Media style effects (the old plugin system).
+## Download
 
-### 2. OFX Plugins (priority order)
-1. **Boris Continuum Complete (BCC)**
-2. **SapphireFX** (Boris FX Sapphire)
-3. Then free/open plugins (openfx-misc, G'MIC, etc.)
+Go to the [Actions](https://github.com/JereyBeni/Open-Editor/actions) tab → latest successful workflow → download:
 
-> Note: BCC and Sapphire are commercial. Open Editor will be a proper OFX host so you can load your own licensed copies.
+- **Open-Editor-Windows** → `open-editor.exe`
+- **Open-Editor-Linux** → binary
 
-## Platforms
-- ✅ **Windows** (CI active)
-- ✅ **Linux** (CI active)
-- ⏳ **Android** (planned – will be added later)
+Or wait for the official Releases (coming soon).
 
-GitHub Actions builds release binaries for Windows and Linux on every push.
+## Features (planned / in progress)
 
-## Goals
-- Timeline-based editor
-- Native OFX + DirectFX host
-- Extremely low memory footprint
-- Fast on old CPUs
-- No Electron, no heavy frameworks
+### Effects Priority
+1. **DirectFX** – old Vegas plugins
+2. **OpenFX**:
+   - Boris Continuum Complete (BCC)
+   - SapphireFX
+   - Free plugins later (openfx-misc, G'MIC, etc.)
 
-## Tech Stack (planned)
-- **UI**: Rust + egui
-- **Video engine**: FFmpeg (static) or lightweight custom
-- **Effects**: Built-in + DirectFX + OpenFX host
-- **Rendering**: Software first
+### Editor
+- Timeline
+- Media bin
+- Preview
+- Effects panel (Vegas style)
+- Low memory footprint
 
-## Related
-Lightweight OFX effects we develop:
+## Building from source
+
+```bash
+git clone https://github.com/JereyBeni/Open-Editor.git
+cd Open-Editor
+cargo build --release
+```
+
+### Requirements
+- Rust (stable)
+- Linux: `libgtk-3-dev` and related packages
+
+## Related repo
+
+Lightweight OFX effects we are developing:
 → [OpenFX-Vegas-Lite](https://github.com/JereyBeni/OpenFX-Vegas-Lite)
 
-## Status
-Early stage. Next up: DirectFX loading + OFX host skeleton focused on BCC/Sapphire compatibility.
+## License
+
+MIT
 
 ---
-Made for people who still rock old PCs 🔥
+
+Made for people who still rock old PCs and love VEGAS 🔥

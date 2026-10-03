@@ -1,5 +1,7 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")] // hide console on Windows release
 
+mod plugins;
+
 use eframe::egui;
 
 fn main() -> eframe::Result<()> {
@@ -22,6 +24,7 @@ fn main() -> eframe::Result<()> {
 #[derive(Default)]
 struct OpenEditorApp {
     // TODO: timeline, media bin, preview, effects panel
+    // plugin_manager: plugins::PluginManager,
 }
 
 impl eframe::App for OpenEditorApp {
@@ -33,15 +36,19 @@ impl eframe::App for OpenEditorApp {
 
             ui.horizontal(|ui| {
                 ui.label("Status:");
-                ui.label("UI skeleton ready 🔥");
+                ui.colored_label(egui::Color32::LIGHT_GREEN, "UI + Plugin system skeleton ready 🔥");
             });
+
+            ui.add_space(12.0);
+            ui.label("Current priorities:");
+            ui.label("1. DirectFX effects support (legacy Vegas)");
+            ui.label("2. OFX host → BCC + SapphireFX first");
 
             ui.add_space(20.0);
             ui.label("Next steps:");
             ui.label("- Timeline");
             ui.label("- Media import");
-            ui.label("- OFX host");
-            ui.label("- VEGAS-style effects panel");
+            ui.label("- Actual DirectFX / OFX loading");
         });
     }
 }
